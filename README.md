@@ -1,79 +1,204 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19949339&assignment_repo_type=AssignmentRepo)
-# MERN Stack Integration Assignment
+# MERN Blog Platform 📝
 
-This assignment focuses on building a full-stack MERN (MongoDB, Express.js, React.js, Node.js) application that demonstrates seamless integration between front-end and back-end components.
+A full-stack blog application built with the **MERN** (MongoDB, Express, React, Node.js) stack. It allows users to create, read, update, and delete blog posts, leave comments, categorize content, upload images, and search posts.
 
-## Assignment Overview
+---
 
-You will build a blog application with the following features:
-1. RESTful API with Express.js and MongoDB
-2. React front-end with component architecture
-3. Full CRUD functionality for blog posts
-4. User authentication and authorization
-5. Advanced features like image uploads and comments
+## 🚀 Features
 
-## Project Structure
+- User authentication (JWT-based)
+- Create, update, delete blog posts
+- Image upload with Multer
+- Add comments to posts
+- Search posts by title or content
+- Categories & tags support
+- RESTful API with Express
+- MongoDB with Mongoose ODM
+
+---
+
+## 📁 Project Structure
 
 ```
 mern-blog/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── services/       # API services
-│   │   ├── context/        # React context providers
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Express.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
+├── client/                 # React frontend
+│   └── src/
+│       ├── components/     # UI components
+│       ├── pages/          # Route pages
+│       ├── api/            # Axios API functions
+│       └── App.js
+├── server/                 # Express backend
+│   ├── controllers/        # Route handlers
+│   ├── models/             # Mongoose schemas
+│   ├── routes/             # API route definitions
+│   ├── middleware/         # Auth and upload middleware
+│   ├── uploads/            # Image upload directory
+│   ├── .env                # Environment variables
+│   └── server.js           # Entry point
+├── README.md               # This file
 ```
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week4-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+## ⚙️ Technologies
 
-## Files Included
+### Frontend
+- React
+- Axios
+- React Router
+- Tailwind CSS (optional)
 
-- `Week4-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Configuration files
-  - Sample models and components
+### Backend
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- Multer (for file uploads)
+- JSON Web Token (JWT)
+- Dotenv
 
-## Requirements
+---
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git
+## 🧑‍💻 Getting Started
 
-## Submission
+### 1. Clone the repo
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+```bash
+git clone https://github.com/your-username/mern-blog.git
+cd mern-blog
+```
 
-1. Complete both the client and server portions of the application
-2. Implement all required API endpoints
-3. Create the necessary React components and hooks
-4. Document your API and setup process in the README.md
-5. Include screenshots of your working application
+### 2. Set up the backend
 
-## Resources
+```bash
+cd server
+npm install
+```
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) 
+Create a `.env` file:
+
+```
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/mern-blog
+JWT_SECRET=your_jwt_secret
+```
+
+Start the backend:
+
+```bash
+npm run dev
+```
+
+### 3. Set up the frontend
+
+```bash
+cd ../client
+npm install
+npm start
+```
+
+---
+
+## 🔐 Authentication
+
+- Auth uses JWT. After login/register, the token should be saved to localStorage.
+- Protected routes require `Authorization: Bearer <token>` in headers.
+
+---
+
+## 📡 API Endpoints
+
+### Auth
+- `POST /api/auth/register` — Register user
+- `POST /api/auth/login` — Login user
+
+### Posts
+- `GET /api/posts` — Get all posts
+- `GET /api/posts/:id` — Get single post
+- `POST /api/posts` — Create post (auth)
+- `PUT /api/posts/:id` — Update post (auth)
+- `DELETE /api/posts/:id` — Delete post (auth)
+
+### Comments
+- `POST /api/posts/:id/comments` — Add comment to a post
+- `GET /api/posts/:id/comments` — Get all comments (if implemented)
+
+### Categories
+- `GET /api/categories` — List all categories
+- `POST /api/categories` — Create a category
+
+### Search
+- `GET /api/posts/search?q=keyword` — Search posts by title/content
+
+---
+
+## 📸 Image Upload
+
+- Uses Multer to handle file uploads.
+- Endpoint: `POST /api/posts` with `multipart/form-data`
+- Form field: `image`
+- File size limit: 5MB
+- Saved under: `server/uploads/`
+
+---
+
+## 🧪 Example Post Payload
+
+```json
+{
+  "title": "React Server Components",
+  "content": "React Server Components allow...",
+  "excerpt": "Learn what server components are.",
+  "category": "60fa8bc14c8b4c2e4c8e5abc",
+  "tags": ["react", "server", "components"],
+  "isPublished": true
+}
+```
+
+---
+
+## 🗃️ Sample Comment Payload
+
+```json
+{
+  "text": "Great article! Very informative."
+}
+```
+
+---
+
+## 🛠 Scripts
+
+### Backend
+
+```bash
+npm run dev     # Start backend with nodemon
+```
+
+### Frontend
+
+```bash
+npm start       # Start React dev server
+```
+
+---
+
+## ❗ Notes
+
+- Ensure MongoDB is running locally or via Atlas.
+- Image uploads require a `uploads/` folder in `server/`.
+- Make sure to seed or manually create categories before using them.
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+## 👤 Author
+
+**CrazyCoder254**  
+MERN Stack Developer  
+[GitHub](https://github.com/CrazyCoder254)

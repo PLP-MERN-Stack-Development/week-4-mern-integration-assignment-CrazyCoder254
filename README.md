@@ -201,4 +201,8 @@ MIT License
 
 **CrazyCoder254**  
 MERN Stack Developer  
+<<<<<<< HEAD
 [GitHub](https://github.com/CrazyCoder254)
+=======
+[GitHub](https://github.com/CrazyCoder254)
+>>>>>>> 0804d671bbc30ecda50bb36ac376a76835d58a8f
